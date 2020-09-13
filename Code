@@ -1,0 +1,159 @@
+conda install bokeh
+import pandas as pd
+from bokeh.io import push_notebook, output_file,show, output_notebook
+from bokeh.layouts import row
+from bokeh.plotting import figure
+output_notebook()
+
+
+
+def make_dashboard(x, gdp_change, unemployment, title, file_name):
+    output_file(file_name)
+    output_notebook()
+    p = figure(title=title, x_axis_label='year', y_axis_label='%')
+    p.line(x.squeeze(), gdp_change.squeeze(), color="firebrick", line_width=4, legend="% GDP change")
+    p.line(x.squeeze(), unemployment.squeeze(), line_width=4, legend="% unemployed")
+    show(p)
+
+
+links={'GDP':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_gdp.csv',\
+       'unemployment':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_unemployment.csv'}
+
+
+
+import pandas as pd
+csv_path=links['GDP']
+df=pd.read_csv(csv_path)
+
+
+
+
+import pandas as pd
+csv_path=links['GDP']
+df=pd.read_csv(csv_path)
+
+
+
+import pandas as pd
+csv_path=links['unemployment']
+df=pd.read_csv(csv_path)
+
+
+
+
+import pandas as pd
+csv_path=links['unemployment']
+df=pd.read_csv(csv_path)
+
+
+
+import pandas as pd
+links={'GDP':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_gdp.csv',\
+       'unemployment':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_unemployment.csv'}
+csv_path=links['unemployment']
+df=pd.read_csv(csv_path)
+df1=df[df['unemployment']>8.5]
+
+
+
+import pandas as pd
+links={'GDP':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_gdp.csv',\
+       'unemployment':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_unemployment.csv'}
+csv_path=links['GDP']
+gdp_dataframe=pd.read_csv(csv_path)
+x = pd.DataFrame(gdp_dataframe, columns=['date'])
+
+
+
+
+import pandas as pd
+links={'GDP':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_gdp.csv',\
+       'unemployment':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_unemployment.csv'}
+csv_path=links['GDP']
+gdp_dataframe=pd.read_csv(csv_path)
+gdp_change = pd.DataFrame(gdp_dataframe, columns=['change-current'])
+
+
+
+import pandas as pd
+links={'GDP':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_gdp.csv',\
+       'unemployment':'https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/PY0101EN/projects/coursera_project/clean_unemployment.csv'}
+csv_path=links['unemployment']
+unemploy_dataframe= pd.read_csv(csv_path)
+unemployment = pd.DataFrame(unemploy_dataframe, columns=['unemployment'])
+
+
+
+title = "Unemployement stats according to GDP"
+
+
+
+file_name = "index.html"
+
+
+
+
+make_dashboard(x=x, gdp_change=gdp_change, unemployment=unemployment, title=title, file_name=file_name)
+
+
+
+credentials={
+  "apikey": "-n5US7Ck5Pe9JhdBsx_4rrVW4QMsWa0NYeCK4DOPzta_",
+  "cos_hmac_keys": {
+    "access_key_id": "2016460a0bed4e08aa9afcd94447448e",
+    "secret_access_key": "89b74ef09e60fd688171729fa300a2961139095650bb3587"
+  },
+  "endpoints": "https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints",
+  "iam_apikey_description": "Auto-generated for key 2016460a-0bed-4e08-aa9a-fcd94447448e",
+  "iam_apikey_name": "WDP-Editor-pythonfordatascienceproject-donotdelete-pr-tqo1rx2vjxhzwn",
+  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/14d5bc96c3b84588b60433b993eaeb26::serviceid:ServiceId-0ff194bb-40ef-41b9-b3bb-b506dfbf11a2",
+  "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/14d5bc96c3b84588b60433b993eaeb26:225ec5f9-14a9-4473-a2b1-2b855b58ce3f::"
+}
+
+
+endpoint = 'https://s3-api.us-geo.objectstorage.softlayer.net'
+
+
+bucket_name ="pythonfordatascienceproject-donotdelete-pr-tqo1rx2vjxhzwn"
+
+
+import boto3
+resource = boto3.resource(
+    's3',
+    aws_access_key_id = credentials["cos_hmac_keys"]['access_key_id'],
+    aws_secret_access_key = credentials["cos_hmac_keys"]["secret_access_key"],
+    endpoint_url = endpoint,
+)
+
+
+
+
+import os
+directory = os.getcwd()
+html_path=directory +"/"+file_name
+directory
+
+directory = os.getcwd()
+f = open(html_path, "r")
+
+
+
+
+resource.Bucket(name=bucket_name).put_object(Key=file_name, Body=f.read())
+
+
+Params = {'Bucket': bucket_name,'Key': file_name }
+
+
+import sys
+time = 7*24*60**2
+client = boto3.client(
+    's3',
+    aws_access_key_id = credentials["cos_hmac_keys"]['access_key_id'],
+    aws_secret_access_key = credentials["cos_hmac_keys"]["secret_access_key"],
+    endpoint_url=endpoint,
+
+)
+url = client.generate_presigned_url('get_object',Params=Params,ExpiresIn=time)
+print(url)
